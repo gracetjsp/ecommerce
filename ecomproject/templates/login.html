@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{% if category %}
+{{product.name}}-ABC Store
+{% endif %}
+{% endblock title %}
+{% block content %}
+<div class="banner">
+<div class="container">
+    <div class="row pt-5">
+        <div class="col-4"></div>
+        <div class="col-12 col-md-4 text-center pt-5 p-3  ">
+            <div>
+                <style>
+                    h5{
+                        color: red;
+                    }
+                </style>
+
+                {% for message in messages %}
+                <h5>{{message}}</h5>
+                {% endfor %}
+               </div>
+            <div class="card rounded-0 shadow border-0 ">
+                <div class="card-title  text-white p-3 border-info border-5" style="background: #040420;">
+                    <h1>Login</h1>
+                </div>
+                <form  class="p-3 border-white border-5 " method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" name="username" placeholder="username" class="form-control rounded-0">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" name="password" placeholder="Enter your password"
+                            class="form-control rounded-0">
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" class="rounded-0 btn my_button text-white"><br>
+                    </div>
+                    <div>
+                        <a href="{% url 'credential:register'%}"  style="text-decoration: none; color: #040420;" >Register here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+</div>
+{% endblock content %}

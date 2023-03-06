@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Search
+{% endblock title %}
+{% block content %}
+<div class="container pt-5" style="min-height: 70vh;">
+    <div class="row p-0 m-0">
+        <div class="text-center">
+            <p class="text-danger"> You have search for : <b>"{{query}}"</b></p>
+        </div>
+        {% for product in products %}
+        <div class="co1-12 col-sm-6 pe-sm-0 pb-5">
+            <div class="card border-0 bg-transparent rounded-0 shadow h-100">
+                <a href="{{product.get_url}}"><img src="{{product.image.url}}" alt="{{product.name}}"
+                        class="img-fluid w-100" style="height: 500px;"></a>
+            </div>
+        </div>
+        <div class="co1-12 col-sm-6 ps-sm-0 pb-5">
+            <div class="card border-0 bg-transparent rounded-0 shadow h-100">
+                <div class="card-title">
+                    <h1 class=" pb-2 text-center">{{product.name}}</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="text-center d-inline-block pb-2" style="border-bottom: 2px solid black;">Product
+                        Description</h5>
+                    <p>{{product.description}}</p>
+                    <p>Price Rs : {{product.price}}/-</p>
+
+                    {% if product.stock <= 0 %} <p class="text-danger"><b>Out of stock</b></p>
+                        {% else %}
+                        <a href="{% url 'cart:add_cart' product.id %}" class="btn btn-lg my_button text-white rounded-0">Add to Cart<i
+                                class="fa-solid fa-cart-shopping text-white ps-2"></i></a>
+                        {% endif%}
+                </div>
+                <div class="card-footer">
+                    <h5><a href="{% url 'shop:allProCat' %}" style="text-decoration: none;">Home</a> <i
+                            class="fa-solid fa-greater-than p-2 pt-3"></i> <a href="{{product.category.get_url}}"
+                            style="text-decoration: none;">{{product.category}}</a><i
+                            class="fa-solid fa-greater-than p-2 pt-3"></i>{{product.name}}</h5>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center">
+            <p class="">0 result found</p>
+            <div class="pt-5 pb-5">
+                <a href="{% url 'shop:allProCat' %}" style="text-decoration: none;"
+                    class="btn my_button rounded-0 text-light btn-lg">Back to home</a>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

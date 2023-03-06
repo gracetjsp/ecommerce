@@ -1,0 +1,27 @@
+.nav-item{
+    letter-spacing: .2em;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.dropdown-item{
+    letter-spacing: .2em;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.dropdown-menu a{
+    background: #040420 !important;
+}
+.coustom_a{
+    text-decoration: none;
+    color: #040420;
+}
+.my_button{
+    background: #040420 !important;
+}
+.banner {
+    background-position: center;
+    background: linear-gradient(to bottom left, #C4F5F3 0%, #FFFFFF 50%, #C4F5F3 100%);
+    background-repeat: no-repeat;
+    min-height: 60vh;
+
+}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{% if category %}
+{{product.name}}-ABC Store
+{% endif %}
+{% endblock title %}
+{% block content %}
+
+<div class="container pt-5 pb-5" style="min-height: 70vh;">
+    <div class="row p-0 m-0">
+        {% if not cart_items %}
+        <div class="text-center" style="min-height: 65vh;">
+            <h1 class="text-center pt-5 pb-5"> Your Shoping Cart is empty</h1>
+
+            <p class="text-center">Please Click<a href="{% url 'shop:allProCat' %}">Here</a> to continue Shoping
+            </p>
+        </div>
+        {% else %}
+        <div class="text-center">
+            <h1 class="text-center pb-5"> Your Shoping Cart</h1>
+        </div>
+        {% for cart_item in cart_items %}
+        <div class="col-4 col-lg-2 pb-3">
+            <a href="cart_item.product.get_absolute_url"><img src="{{ cart_item.product.image.url }}" alt=""
+                    class="img-fluid w-100 h-100"></a>
+        </div>
+        <div class="col-5 col-lg-2 pb-3">
+            <div class="card bg-transparent border-0 rounded-0 p-0">
+                <div class="card-heading">
+                    <h5>{{cart_item.product.name}}</h5>
+                </div>
+                <div class="card-body p-0">
+                    <h6> Price: ${{cart_item.product.price}}</h6>
+                    Qty : <h6>{{cart_item.quantity}} x {{cart_item}}</h6>
+                    Total: <h6>$ {{cart_item.sub_total}}</h6>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-3 col-lg-2 d-flex flex-column pb-3">
+            {% if cart_item.quantity < cart_item.product.stock %} <div class="col-3 col-lg-2">
+                <div>
+                    <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="coustom_a"><i
+                            class="fa-solid fa-plus"></i></a>
+                </div>
+                <div>
+                    <a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="coustom_a"><i
+                            class="fa-solid fa-minus"></i></a>
+                </div>
+                <div>
+                    <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="coustom_a"><i
+                            class="fa-solid fa-trash-can "></i></a>
+                </div>
+
+        </div>
+        {% else %}
+        <div class="col-3 col-lg-2 d-flex flex-column pb-3">
+            <div>
+                <a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="coustom_a"><i
+                        class="fa-solid fa-minus"></i></a>
+            </div>
+            <div>
+                <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="coustom_a"><i
+                        class="fa-solid fa-trash-can "></i></a>
+            </div>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+        <div class="col-12 col-lg-6 pb-3">
+            <div class="card bg-transparent border-0 rounded-0">
+                <div class="card-heading">
+                    <h5 class="text-center">Checkout</h5>
+                    <div class="card-body p-0">
+                        <p>Please review your shopping cart items before proceeding with the order payment.</p>
+                        <p>Your total is : <strong>{{total}}</strong></p>
+                    </div>
+
+                </div>
+                <div class=" d-flex justify-content-between">
+                    <div class="">
+                        <a href="{% url 'shop:allProCat' %}" class="btn rounded-0 my_button btn-block text-white">Continue
+                            Shopping</a>
+                    </div>
+                    <div class="">
+                        <a href="{% url 'shop:allProCat' %}" class="btn rounded-0 my_button btn-block text-white ps-3 pe-3">Make payment</a>
+                    </div>
+                </div>
+                
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endblock content %}
