@@ -22,7 +22,7 @@
         </div>
         {% for cart_item in cart_items %}
         <div class="col-4 col-lg-2 pb-3">
-            <a href="cart_item.product.get_absolute_url"><img src="{{ cart_item.product.image.url }}" alt=""
+            <a href="{% url 'shop:allProCat' %}"><img src="{{ cart_item.product.image.url }}" alt=""
                     class="img-fluid w-100 h-100"></a>
         </div>
         <div class="col-5 col-lg-2 pb-3">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body p-0">
                     <h6> Price: ${{cart_item.product.price}}</h6>
-                    Qty : <h6>{{cart_item.quantity}} x {{cart_item}}</h6>
+                    Qty : <h6>{{cart_item.quantity}} x {{cart_item.product.price}}</h6>
                     Total: <h6>$ {{cart_item.sub_total}}</h6>
                 </div>
 
